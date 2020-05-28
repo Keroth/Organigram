@@ -1,36 +1,40 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { error } from 'protractor';
+import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
-  styleUrls: ['./nav.component.css']
+  styleUrls: ['./nav.component.css'],
 })
 export class NavComponent implements OnInit {
   model: any = {};
 
-  constructor(private authService: AuthService) { }
+  constructor(
+    public authService: AuthService,
+    private alertify: AlertifyService
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   login() {
-    this.authService.login(this.model).subscribe(next =>{
-      console.log('Login succesfull!');
-    }, error => {
-      console.log('Login failed!');
-    });
+    this.authService.login(this.model).subscribe(
+      (next) => {
+        this.alertify.success('Login succesfull!');
+      },
+      (error) => {
+        this.alertify.error('Login failed!');
+      }
+    );
   }
 
   loggedIn() {
-    const token = localStorage.getItem('token');
-    return !!token;
+    return this.authService.loggedIn();
   }
 
   logout() {
     localStorage.removeItem('token');
-    console.log('Logout succesfull!');
+    this.alertify.message('Logout succesfull!');
   }
-
 }
