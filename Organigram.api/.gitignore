@@ -2,4 +2,6 @@ bin
 .vscode
 obj
 *.db
+*.db-shm
+*.db-shm
 appsettings*.json
