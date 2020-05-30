@@ -9,8 +9,8 @@ using Organigram.api.Data;
 namespace Organigram.api.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200530121158_AddedObjectEntity")]
-    partial class AddedObjectEntity
+    [Migration("20200530131454_Init")]
+    partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,7 +45,7 @@ namespace Organigram.api.Migrations
                     b.Property<string>("Domains")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("ParentId")
+                    b.Property<int>("ParentId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Purpose")
@@ -53,6 +53,9 @@ namespace Organigram.api.Migrations
 
                     b.Property<string>("Title")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
 
@@ -117,7 +120,9 @@ namespace Organigram.api.Migrations
 
                     b.HasOne("Organigram.api.Models.Object", "Parent")
                         .WithMany()
-                        .HasForeignKey("ParentId");
+                        .HasForeignKey("ParentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

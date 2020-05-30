@@ -3,21 +3,39 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Organigram.api.Migrations
 {
-    public partial class AddedObjectEntity : Migration
+    public partial class Init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<bool>(
-                name: "Admin",
-                table: "Users",
-                nullable: false,
-                defaultValue: false);
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Username = table.Column<string>(nullable: true),
+                    PasswordHash = table.Column<byte[]>(nullable: true),
+                    PasswordSalt = table.Column<byte[]>(nullable: true),
+                    Admin = table.Column<bool>(nullable: false),
+                    Editor = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
+                });
 
-            migrationBuilder.AddColumn<bool>(
-                name: "Editor",
-                table: "Users",
-                nullable: false,
-                defaultValue: false);
+            migrationBuilder.CreateTable(
+                name: "Values",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Values", x => x.Id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "Objects",
@@ -30,7 +48,8 @@ namespace Organigram.api.Migrations
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     ChangedAt = table.Column<DateTime>(nullable: false),
                     Title = table.Column<string>(nullable: true),
-                    ParentId = table.Column<int>(nullable: true),
+                    ParentId = table.Column<int>(nullable: false),
+                    Type = table.Column<int>(nullable: false),
                     Purpose = table.Column<string>(nullable: true),
                     Domains = table.Column<string>(nullable: true),
                     Accountabilities = table.Column<string>(nullable: true),
@@ -56,7 +75,7 @@ namespace Organigram.api.Migrations
                         column: x => x.ParentId,
                         principalTable: "Objects",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
@@ -80,13 +99,11 @@ namespace Organigram.api.Migrations
             migrationBuilder.DropTable(
                 name: "Objects");
 
-            migrationBuilder.DropColumn(
-                name: "Admin",
-                table: "Users");
+            migrationBuilder.DropTable(
+                name: "Values");
 
-            migrationBuilder.DropColumn(
-                name: "Editor",
-                table: "Users");
+            migrationBuilder.DropTable(
+                name: "Users");
         }
     }
 }
