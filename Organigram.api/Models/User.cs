@@ -6,5 +6,7 @@ namespace Organigram.api.Models
         public string Username { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
+        public bool Admin { get; set; }
+        public bool Editor { get; set; }
     }
 }

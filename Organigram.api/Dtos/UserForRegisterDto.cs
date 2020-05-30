@@ -10,5 +10,7 @@ namespace Organigram.api.Dtos
         [Required]
         [StringLength(20, MinimumLength = 6, ErrorMessage = "Password must be between 6 and 20 Characters long")]
         public string Password { get; set; }
+        public bool Admin { get; set; }
+        public bool Editor { get; set; }
     }
 }
