@@ -20,6 +20,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using Organigram.api.Data;
 using Organigram.api.Helpers;
+using Organigram.api.Models;
 
 namespace Organigram.api
 {
@@ -41,6 +42,7 @@ namespace Organigram.api
             services.AddAutoMapper(typeof(OrgObjectRepository).Assembly);
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IOrgObjectRepository, OrgObjectRepository>();
+            services.AddHttpContextAccessor();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
                     options.TokenValidationParameters = new TokenValidationParameters

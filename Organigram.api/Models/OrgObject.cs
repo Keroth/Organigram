@@ -19,7 +19,7 @@ namespace Organigram.api.Models
         // Data section
         [Required]
         public string Title { get; set; }
-        public Object Parent { get; set; }
+        public OrgObject Parent { get; set; }
         public int? ParentId { get; set; }
         public ICollection<OrgObject> Children { get; set; }
         [Required]
