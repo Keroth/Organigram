@@ -9,6 +9,6 @@ namespace Organigram.api.Data
 
         public DbSet<Value> Values { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<Object> Objects { get; set; }
+        public DbSet<OrgObject> Objects { get; set; }
     }
 }

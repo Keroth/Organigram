@@ -31,25 +31,26 @@ namespace Organigram.api.Migrations
                     b.Property<DateTime>("ChangedAt")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("ChangedById")
+                    b.Property<int>("ChangedById")
                         .HasColumnType("INTEGER");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("CreatedById")
+                    b.Property<int>("CreatedById")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Domains")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("ParentId")
+                    b.Property<int?>("ParentId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Purpose")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Type")
@@ -110,17 +111,19 @@ namespace Organigram.api.Migrations
                 {
                     b.HasOne("Organigram.api.Models.User", "ChangedBy")
                         .WithMany()
-                        .HasForeignKey("ChangedById");
+                        .HasForeignKey("ChangedById")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Organigram.api.Models.User", "CreatedBy")
                         .WithMany()
-                        .HasForeignKey("CreatedById");
-
-                    b.HasOne("Organigram.api.Models.Object", "Parent")
-                        .WithMany()
-                        .HasForeignKey("ParentId")
+                        .HasForeignKey("CreatedById")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("Organigram.api.Models.Object", "Parent")
+                        .WithMany("Children")
+                        .HasForeignKey("ParentId");
                 });
 #pragma warning restore 612, 618
         }

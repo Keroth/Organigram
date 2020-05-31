@@ -43,12 +43,12 @@ namespace Organigram.api.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    CreatedById = table.Column<int>(nullable: true),
-                    ChangedById = table.Column<int>(nullable: true),
+                    CreatedById = table.Column<int>(nullable: false),
+                    ChangedById = table.Column<int>(nullable: false),
                     CreatedAt = table.Column<DateTime>(nullable: false),
                     ChangedAt = table.Column<DateTime>(nullable: false),
-                    Title = table.Column<string>(nullable: true),
-                    ParentId = table.Column<int>(nullable: false),
+                    Title = table.Column<string>(nullable: false),
+                    ParentId = table.Column<int>(nullable: true),
                     Type = table.Column<int>(nullable: false),
                     Purpose = table.Column<string>(nullable: true),
                     Domains = table.Column<string>(nullable: true),
@@ -63,19 +63,19 @@ namespace Organigram.api.Migrations
                         column: x => x.ChangedById,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Objects_Users_CreatedById",
                         column: x => x.CreatedById,
                         principalTable: "Users",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Objects_Objects_ParentId",
                         column: x => x.ParentId,
                         principalTable: "Objects",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
