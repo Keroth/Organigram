@@ -15,6 +15,15 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
 import { OverviewComponent } from './overview/overview.component';
 import { SearchComponent } from './search/search.component';
 import { appRoutes } from './routes';
+import { orgUnitViewComponent } from './orgUnitView/orgUnitView.component';
+import { OrgUnitTreeItemComponent } from './orgUnit-treeItem/orgUnit-treeItem.component';
+import {MatTreeModule} from '@angular/material/tree';
+import {MatIconModule} from '@angular/material/icon';
+import { OrUnitFormComponent } from './orgUnit-form/orgUnit-form.component';
+import {MatInputModule} from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+import {MatDialogModule} from '@angular/material/dialog';
+
 
 
 
@@ -25,7 +34,10 @@ import { appRoutes } from './routes';
       HomeComponent,
       RegisterComponent,
       OverviewComponent,
-      SearchComponent
+      SearchComponent,
+      orgUnitViewComponent,
+      OrgUnitTreeItemComponent,
+      OrUnitFormComponent
    ],
    imports: [
       BrowserModule,
@@ -33,7 +45,12 @@ import { appRoutes } from './routes';
       FormsModule,
       BrowserAnimationsModule,
       BsDropdownModule.forRoot(),
-      RouterModule.forRoot(appRoutes)
+      RouterModule.forRoot(appRoutes),
+      MatTreeModule,
+      MatIconModule,
+      MatInputModule,
+      MatButtonModule,
+      MatDialogModule
    ],
    providers: [
       ErrorInterceptorProvider

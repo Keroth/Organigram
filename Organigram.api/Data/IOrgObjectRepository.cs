@@ -14,5 +14,6 @@ namespace Organigram.api.Data
          Task<OrgObject> GetDetail(int id);
          OrgObject Create(OrgObject item);
          OrgObject Update(OrgObjectForDetailDto item);
+         Task<OrgObject> Delete(int id);
     }
 }

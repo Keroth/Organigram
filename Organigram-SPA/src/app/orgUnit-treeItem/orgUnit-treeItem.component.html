@@ -1,0 +1,35 @@
+<div class="row ml-1">
+  <div>
+    <div *ngIf="orgUnit.type == 1; then circleBlock else roleBlock"></div>
+    <ng-template #circleBlock>
+
+      <mat-icon class="vertical-align-middle">group_work</mat-icon>
+      {{orgUnit.title}}
+
+      <button mat-icon-button (click)="onEdit()">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="onView()">
+        <mat-icon>remove_red_eye</mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="onAdd()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </ng-template>
+    <ng-template #roleBlock>
+      <mat-icon class="vertical-align-middle">account_circle</mat-icon>
+      {{orgUnit.title}}
+
+      <button mat-icon-button (click)="onEdit()">
+        <mat-icon>edit</mat-icon>
+      </button>
+
+      <button mat-icon-button (click)="onView()">
+        <mat-icon>remove_red_eye</mat-icon>
+      </button>
+
+    </ng-template>
+  </div>
+</div>

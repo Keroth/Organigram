@@ -67,5 +67,19 @@ namespace Organigram.api.Data
             _context.SaveChanges();
             return itemOld;
         }
+
+        public async Task<OrgObject> Delete(int id)
+        {
+            var item = await _context.Objects.FindAsync(id);
+            if (item == null)
+            {
+                return null;
+            }
+
+            _context.Objects.Remove(item);
+            await _context.SaveChangesAsync();
+
+            return item;
+        }
     }
 }

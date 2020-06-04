@@ -34,6 +34,13 @@ namespace Organigram.api.Controllers
             var objectTree = await _repo.GetListFrom(id);
             return Ok(objectTree);
         }
+        
+        [HttpGet("unit/{id}")]
+        public async Task<IActionResult> GetDetail(int id)
+        {
+            var item = await _repo.GetDetail(id);
+            return Ok(item);
+        }
 
         [HttpPost("create")]
         public IActionResult CreateObject(OrgObjectForCreateDto item)
@@ -54,6 +61,16 @@ namespace Organigram.api.Controllers
         public IActionResult UpdateObject(OrgObjectForDetailDto item)
         {
             return Ok(_repo.Update(item));
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> DeleteObject(int id)
+        {
+            OrgObject item  = await _repo.Delete(id);
+            if (item != null)
+                return Ok(item);
+            
+            return NotFound();
         }
 
     }

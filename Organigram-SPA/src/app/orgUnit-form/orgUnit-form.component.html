@@ -1,0 +1,52 @@
+<mat-dialog-content>
+<form #orgUnitForm="ngForm">
+  
+  <div class="form-col">
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label>Bezeichner</mat-label>
+        <input matInput required name="title" [(ngModel)]="data.orgUnit.title" [disabled]="fieldState">
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label>Typ</mat-label>
+        <select matNativeControl required name="type" [(ngModel)]="data.orgUnit.type" [disabled]="fieldState">
+          <option value=1>Kreis</option>
+          <option value=2>Rolle</option>
+        </select>
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label>Inhaber</mat-label>
+        <input matInput name="assignee" [(ngModel)]="data.orgUnit.assignee" [disabled]="fieldState">
+      </mat-form-field>
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Aufgaben</mat-label>
+        <textarea matInput name="purpose" [(ngModel)]="data.orgUnit.purpose" [disabled]="fieldState"></textarea>
+      </mat-form-field>  
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Bereiche</mat-label>
+        <textarea matInput name="domains" [(ngModel)]="data.orgUnit.domains" [disabled]="fieldState"></textarea>
+      </mat-form-field>  
+    </div>
+    <div class="form-group">
+      <mat-form-field appearance="fill">
+        <mat-label>Befugnisse</mat-label>
+        <textarea matInput name="accountabilities" [(ngModel)]="data.orgUnit.accountabilities" [disabled]="fieldState"></textarea>
+      </mat-form-field>  
+    </div>
+  </div>
+</form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button class="btn btn-success" *ngIf="data.state != 'view'" (click)="onCommit()">{{commitButtonText}}</button>
+    <button class="btn mat-dialog-close" type="button" (click)="onClose()">Abbruch</button>
+</mat-dialog-actions>
+  
+
